@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/context/AuthContext";
 import { UserPlus, IndianRupee, Search } from "lucide-react";
 import Link from "next/link";
 
@@ -9,29 +10,42 @@ const cards = [
     desc: "Register a new student into the system",
     icon: UserPlus,
     bg: "from-indigo-500 to-indigo-600",
-    link: "/dashboard/new-student"
+    link: "/dashboard/new-student",
+    allowed: true
   },
   {
     title: "Check Fee Due",
     desc: "View students with pending fee payments",
     icon: IndianRupee,
     bg: "from-rose-500 to-rose-600",
-    link: "/dashboard/check-fee"
+    link: "/dashboard/check-fee",
+    allowed: true
   },
   {
     title: "Search Student",
     desc: "Quickly find a student by name or ID",
     icon: Search,
     bg: "from-emerald-500 to-emerald-600",
-    link: "/dashboard/search"
+    link: "/dashboard/search",
+    allowed: true
+  },
+  {
+    title: "Payment History",
+    desc: "Search and Filter Payment details",
+    icon: IndianRupee,
+    bg: "from-yellow-500 to-yellow-600",
+    link: "/dashboard/payments",
+    allowed: false
   },
 ];
 
 export default function ActionCards() {
+  const { user, loading, setLoading } = useAuth();
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {cards.map((card, i) => {
         const Icon = card.icon;
+        if(card.allowed || (!card.allowed && (user.email.split('@')[0] == process.env.NEXT_PUBLIC_ADMIN_1 || user.email.split('@')[0] == process.env.NEXT_PUBLIC_ADMIN_2))) {
         return (
           <Link href={card.link} key={i}><div
             key={i}
@@ -60,6 +74,7 @@ export default function ActionCards() {
           </div>
           </Link>
         );
+      }
       })}
     </div>
   );

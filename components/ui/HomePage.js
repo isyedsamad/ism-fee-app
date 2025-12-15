@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -6,9 +6,11 @@ import ActionCards from './ActionCard';
 import { IndianRupee, LayoutDashboard } from "lucide-react";
 const HomePage = () => {
     const { user, loading, logout } = useAuth();
+    const [loadCards, setLoadCards] = useState(false);
     const router = useRouter();
     useEffect(() => {
         if (!loading && !user) router.push("/");
+        if(!loading && user) setLoadCards(true);
     }, [user, loading]);
   return (
     <>
@@ -40,7 +42,9 @@ const HomePage = () => {
             </div>
             </header>
             <div className='p-5'>
-                <ActionCards />
+                {loadCards && (
+                    <ActionCards email={user.email} />
+                )}
             </div>
         </div>
     </>
