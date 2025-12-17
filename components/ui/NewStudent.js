@@ -17,6 +17,7 @@ export default function NewStudent() {
         course: "",
         totalFee: "",
         mode: "",
+        time: "",
         admDate: new Date(),
         admFee: "",
         dues: "",
@@ -33,6 +34,7 @@ export default function NewStudent() {
             id: form.id.toLowerCase(),
             name: form.name.toLowerCase(),
             course: form.course,
+            batchtime: form.time,
             totalFee: Number(form.totalFee),
             admFee: Number(form.admFee),
             dues: Number(form.dues),
@@ -128,6 +130,17 @@ export default function NewStudent() {
         />
         </div>
 
+        <div>
+        <p className="text-sm font-semibold">Student Batch Time</p>
+        <input
+          type="time"
+          name="batchtime"
+          value={form.time}
+          onChange={handleChange}
+          className="w-full rounded-md border-2 border-gray-200 px-4 py-2 text-sm"
+        />
+        </div>
+
         {/* Course */}
         <div>
         <p className="text-sm font-semibold">Course</p>
@@ -139,7 +152,14 @@ export default function NewStudent() {
         >
           <option value="">Select Course</option>
           <option value="DCA">DCA</option>
+          <option value="DCA with Tally">DCA with Tally</option>
           <option value="ADCA">ADCA</option>
+          <option value="Tally">Tally</option>
+          <option value="Office">Office</option>
+          <option value="AutoCAD">AutoCAD</option>
+          <option value="DFA">DFA</option>
+          <option value="Web Designing">Web Designing</option>
+          <option value="Excel">Excel</option>
         </select>
         </div>
 
