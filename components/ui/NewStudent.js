@@ -18,6 +18,7 @@ export default function NewStudent() {
         totalFee: "",
         mode: "",
         time: "",
+        mobile: '',
         admDate: new Date(),
         admFee: "",
         dues: "",
@@ -34,6 +35,7 @@ export default function NewStudent() {
             id: form.id.toLowerCase(),
             name: form.name.toLowerCase(),
             course: form.course,
+            mobile: form.mobile,
             batchtime: form.time,
             totalFee: Number(form.totalFee),
             admFee: Number(form.admFee),
@@ -126,6 +128,18 @@ export default function NewStudent() {
           value={form.name}
           onChange={handleChange}
           placeholder="Student Name"
+          className="w-full rounded-md border-2 border-gray-200 px-4 py-2 text-sm"
+        />
+        </div>
+
+        <div>
+        <p className="text-sm font-semibold">Student Mobile</p>
+        <input
+          type="number"
+          name="mobile"
+          value={form.mobile}
+          onChange={handleChange}
+          placeholder="Student Mobile Number"
           className="w-full rounded-md border-2 border-gray-200 px-4 py-2 text-sm"
         />
         </div>
